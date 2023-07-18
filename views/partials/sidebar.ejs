@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="./partials/css/sidebar.css">
+
+<div class="sidebar">
+
+    <div class="sidebar-util">
+
+    <div class="shortcut-links">
+        <a href="/"><img src="../images/home.png" loading="lazy" alt="" srcset=""><p>Home</p></a>
+        <a href="/userpage"><img src="../images/library.png" loading="lazy" alt="" srcset=""><p>Library</p></a>
+        <a href="/likedvideos"><img src="../images/like.png" loading="lazy" alt="" srcset=""><p>Liked Videos</p></a>
+       
+        <hr>
+    </div>
+
+    <% if(subs.length > 0){%>
+
+    <div class="subscribed-list">
+        <h3>Subscriptions</h3>
+
+     <%   for(let i = 0 ; i < subs.length ; i++){  %>
+        <a href=/channelpage?c=<%=subs[i].snippet.resourceId.channelId%>>
+            <img src="<%=subs[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset="">
+            <p><%=subs[i].snippet.title%></p>
+        </a>
+     <% }  %>
+
+
+    </div>
+
+    <%}%>
+</div>
+</div>
+
+

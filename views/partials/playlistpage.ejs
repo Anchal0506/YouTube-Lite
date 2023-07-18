@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="./partials/css/playlistpage.css">
+
+<div id="playlistpage">
+
+<div class="info-section">
+    <img class="blur-img" src="<%=playlist_info.snippet.thumbnails.medium.url%>" loading="lazy" alt="">
+
+    <a href="#" class="playlist-img" >
+        <img src="<%=playlist_info.snippet.thumbnails.medium.url%>" loading="lazy" alt="">
+    </a>
+
+    <div class="playlist-details">
+        <div class="title"><%=playlist_info.snippet.title%></div>
+
+        <%  let d1 = new Date(playlist_info.snippet.publishedAt);%>
+        <%  let d2 = new Date();%>
+        <%  let date = Math.abs(d2-d1);%>
+        <%  let time = 0;%>
+        <%  date = date/(1000*60); time = Math.trunc(date) +" mins" %>
+        <%  if(date >= 60){ date = date/60; time = Math.trunc(date) + " hours";%>
+        <%  if(date >= 24){ date = date/24; time = Math.trunc(date) + " days"%>
+        <%  if(date >= 31){ date = date/30.4167; time = Math.trunc(date) + " months"%>
+        <%  if(date >= 12){ date = date/12; time = Math.trunc(date) + " years"}%>
+        <%  }}}%>
+
+
+        <div class="other-details">
+            <div class="channel-name"><%=playlist_info.snippet.channelTitle%></div>
+            <div class="playlist-info"><%=playlist_info.contentDetails.itemCount%> videos Last &bull; Updated <%=time%> ago</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="videos-section">
+   
+    <% for(let i = 0 ; i < playlist_items.items.length ; i++){%>
+
+        
+
+        <%  d1 = new Date(playlist_info.snippet.publishedAt);%>
+        <%  d2 = new Date();%>
+        <%  date = Math.abs(d2-d1);%>
+        <%  time = 0;%>
+        <%  date = date/(1000*60); time = Math.trunc(date) +" mins" %>
+        <%  if(date >= 60){ date = date/60; time = Math.trunc(date) + " hours";%>
+        <%  if(date >= 24){ date = date/24; time = Math.trunc(date) + " days"%>
+        <%  if(date >= 31){ date = date/30.4167; time = Math.trunc(date) + " months"%>
+        <%  if(date >= 12){ date = date/12; time = Math.trunc(date) + " years"}%>
+        <%  }}}%>
+
+        <% let imgurl = playlist_items.items[i].snippet.thumbnails.medium%>
+
+        <% if(imgurl){imgurl = imgurl.url%>
+        <% }else{%>
+        <% imgurl = "./images/skeleton.png" }%>
+
+        <div class="vid-list">
+            <div class="num"><%=i+1%></div>
+            <a href="/videopage?v=<%=playlist_items.items[i].contentDetails.videoId%>&c=<%=playlist_items.items[i].snippet.channelId%>" class="vid-img"><img src="<%=imgurl%>" loading="lazy" alt="img"></a>
+        <div class="vid-details">
+          <div class="vid-title"><%=playlist_items.items[i].snippet.title%></div>
+          <div class="vid-cred">
+            <div class="channel-name"><%=playlist_items.items[i].snippet.channelTitle%></div>
+             <div class="viewsDate">Last Updated <%=time%> ago</div>
+          </div>
+        </div>
+
+        </div>
+
+    <%}%>
+</div>
+
+
+</div>

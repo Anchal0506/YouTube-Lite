@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Lite - Library</title>
+    <link rel="stylesheet" href="./css/HomePage.css">
+    </head>
+    <%- include('partials/nav.ejs') %>
+    
+    <%- include('partials/sidebar.ejs')%>
+    
+    <%- include('partials/userpage.ejs')%>
+    
+    <%- include('partials/bottommenu.ejs') %>
+
+
+<script>
+    let menuIcon = document.querySelector('.menu-icon');
+let sidebar = document.querySelector('.sidebar');
+let mainpage = document.querySelector('#userpage');
+
+
+menuIcon.addEventListener('click',()=>{
+    sidebar.classList.toggle('small-sidebar');
+    mainpage.classList.toggle('larger-container');
+    document.querySelector('.sidebar .shortcut-links').classList.toggle('large-padding');
+    document.querySelector('.sidebar .subscribed-list').classList.toggle('large-padding');
+});
+</script>
+
+<script src="https://kit.fontawesome.com/57a3e51741.js" crossorigin="anonymous"></script>
+</body>
+</html>

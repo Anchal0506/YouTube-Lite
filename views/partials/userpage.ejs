@@ -1,0 +1,167 @@
+<link rel="stylesheet" href="./partials/css/userpage.css">
+
+<div id="userpage">
+    
+    <div class="row">
+        <div class="listpage">
+            <div class="videos-collection" id="liked-videos">
+            
+                <div class="title"><img src="./images/like.png" alt=""> Liked Videos <span><%=like_count%></span> <a href="/likedvideos">See All</a></div>
+
+                <div class="collection">
+
+                    <% for(let i = 0 ; i < Math.min(5,liked.length) ; i++){ %>
+                     
+                        <%  let d1 = new Date(liked[i].snippet.publishedAt);%>
+                        <%  let d2 = new Date();%>
+                        <%  let date = Math.abs(d2-d1);%>
+                        <%  let time = 0;%>
+                        <%  date = date/(1000*60); time = Math.trunc(date) +" mins" %>
+                        <%  if(date >= 60){ date = date/60; time = Math.trunc(date) + " hours";%>
+                        <%  if(date >= 24){ date = date/24; time = Math.trunc(date) + " days"%>
+                        <%  if(date >= 31){ date = date/30.4167; time = Math.trunc(date) + " months"%>
+                        <%  if(date >= 12){ date = date/12; time = Math.trunc(date) + " years"}%>
+                        <%  }}}%>
+  
+                        <%let viewss = 0;%>
+                        <%let views = liked[i].statistics.viewCount; viewss = views%>
+                        <%if(views >= 1000){views = views/1000; viewss = Math.trunc(views) + 'K'}%>
+                        <%if(views >= 1000){views = views/1000; viewss = Math.trunc(views) + 'M'}%>
+                        <%if(views >= 1000){views = views/1000; viewss = Math.trunc(views) + 'B'}%>
+                        
+                    <div class="vid-list">
+                         <a href="/videopage?v=<%=liked[i].id%>&c=<%=liked[i].snippet.channelId%>"><img src="<%=liked[i].snippet.thumbnails.medium.url%>" alt="" srcset=""></a>
+                         <div class="vid-title"><%=liked[i].snippet.title%></div>
+                       <a href="/channelpage?c=<%=liked[i].snippet.channelId%>">  <div class="vid-channel"><%=liked[i].snippet.channelTitle%></div> </a>
+                         <div class="vid-detials"><%=viewss%> views &bull; <%=time%> ago</div>
+                    </div>
+                    <%}%>
+                    
+                </div>
+            
+            </div>
+
+            <hr>
+
+            <div class="videos-collection" id="Subscriptions">
+            
+                <div class="title"><img src="./images/subscriptionsicon.png" alt=""> Subscription<span><%=sub_count%></span> <a>See All</a></div>
+
+                <div class="collection">
+
+                  
+
+                    <%for(let i = 0 ; i < subs.length; i++){%>
+                      <%  let d1 = new Date(subs[i].snippet.publishedAt);%>
+                      <%  let d2 = new Date();%>
+                      <%  let date = Math.abs(d2-d1);%>
+                      <%  let time = 0;%>
+                      <%  date = date/(1000*3600*24); time = Math.trunc(date)+" days"%>
+                      <%  if(date >= 31){ date = date/(30.4167); time = Math.trunc(date) + " months" }%>
+                      <%  if(date >= 12){ date = date/(12); time = Math.trunc(date) + " years" }%>
+                      
+
+                    <%if(i < 5){%>
+                    <div class="vid-list">
+                         <a href="/channelpage?c=<%=subs[i].snippet.resourceId.channelId%>"><img src="<%=subs[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                         <div class="vid-channel"><%=subs[i].snippet.title%></div>
+                         <div class="vid-detials"><%=subs[i].contentDetails.totalItemCount%> items &bull; <%=time%> ago</div>
+                    </div>
+                    <%}else{%>
+                        <div class="vid-list hidden">
+                            <a href="/channelpage?c=<%=subs[i].snippet.resourceId.channelId%>"><img src="<%=subs[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                            <div class="vid-channel"><%=subs[i].snippet.title%></div>
+                            <div class="vid-detials"><%=subs[i].contentDetails.totalItemCount%> items &bull; <%=time%> ago</div>
+                       </div>
+                     <%}%>
+
+
+                    <%}%>
+
+                </div>
+            
+            </div>
+
+            <hr>
+
+            <div class="videos-collection" id="playlists">
+            
+                <div class="title"><img src="./images/playlisticon.png" alt=""> Playlists <span><%=playlist_count%></span>  <a href="#">See All</a></div>
+
+                <div class="collection">
+
+                    <% for(let i = 0 ; i < playlists.length ; i++){ %>
+
+                    <%  let d1 = new Date(playlists[i].snippet.publishedAt);%>
+                    <%  let d2 = new Date();%>
+                    <%  let date = Math.abs(d2-d1);%>
+                    <%  let time = 0;%>
+                    <%  date = date/(1000*3600*24); time = Math.trunc(date)+" days"%>
+                    <%  if(date >= 31){ date = date/(30.4167); time = Math.trunc(date) + " months" }%>
+                    <%  if(date >= 12){ date = date/(12); time = Math.trunc(date) + " years" }%>
+
+                    <%if(i < 5){%>
+                    <div class="vid-list">
+                    <%}else{%>
+                    <div class="vid-list hidden">
+                    <%}%>
+                         <a href="/playlist?p=<%=playlists[i].id%>"><img src="<%=playlists[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                         <div class="vid-title"><%=playlists[i].snippet.title%></div>
+                         <div class="vid-channel"><%=playlists[i].snippet.channelTitle%></div>
+                         <div class="vid-detials"><%=playlists[i].contentDetails.itemCount%> items &bull; <%=time%> ago</div>
+                    </div>
+
+                    <%}%>
+
+                </div>
+            
+            </div>
+
+            <hr>
+
+        </div>
+
+
+        <div class="user-info">
+              <img src="<%=profile.photos[0].value%>" loading="lazy" alt=""> 
+              <div class="user-name"><%=profile.displayName%></div>
+              
+              <hr>
+              <div class="details">
+                <div class="list">Subscriptions</div>
+                <div class="list"><%=sub_count%></div>
+              </div>
+              <hr>
+
+              <div class="details">
+                <div class="list">Uploads</div>
+                <div class="list">0</div>
+              </div>
+              <hr>
+
+              <div class="details">
+                <div class="list">Likes</div>
+                <div class="list">0</div>
+              </div>
+              <hr>
+              
+        
+        </div>
+    </div>
+    
+</div>
+
+
+<script>
+    let sub_btn = document.querySelector('#Subscriptions .title a');
+    let sub_items = document.querySelectorAll('#userpage #Subscriptions .collection .vid-list.hidden')
+
+    sub_btn.addEventListener('click',()=>{
+        if(sub_btn.innerHTML == 'See All') sub_btn.innerHTML = "Hide";
+        else sub_btn.innerHTML = "See All";
+        
+        sub_items.forEach(item => {
+            item.classList.toggle('hidden');
+        });
+    })
+</script>

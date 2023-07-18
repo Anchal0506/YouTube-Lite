@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="./partials/css/mainchannelpage.css">
+
+<div id="channelmainpage">
+
+    <div class="channel-info">
+
+        <div class="profile-photo">
+            <img src="<%=channelinfo.snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset="">
+        </div>
+
+        <%  let subscriberss = 0;%>
+        <%  let subscribers = channelinfo.statistics.subscriberCount; subscriberss = subscribers;%>
+        <%  if(subscribers >= 1000){subscribers = subscribers/1000; subscriberss = Math.trunc(subscribers) + 'K'}%>
+        <%  if(subscribers >= 1000){subscribers = subscribers/1000; subscriberss = Math.trunc(subscribers) + 'M'}%>
+        <%  if(subscribers >= 1000){subscribers = subscribers/1000; subscriberss = Math.trunc(subscribers) + 'B'}%>
+
+        
+
+
+        <div class="channel-details">
+            <div class="channel-name"><%=channelinfo.snippet.title%></div>
+            <div class="fancy-id"><%=channelinfo.snippet.customUrl%></div>
+            <div class="subscribers"><%=subscriberss%> subscribers</div>
+            <div class="subscribers"><%=channelinfo.statistics.videoCount%> videos</div>
+            <div class="items"><%=channelinfo.statistics.viewCount%> views</div>
+        </div>
+
+        <div class="buttons">
+
+            <% if(isSubscribed === true){%>
+                <button hx-get = "/subscribe?subid=<%=sub_id%>&value=false&c=<%=channelinfo.id%>"
+                      hx-swap = "outerHTML"
+                     class="subscribe-btn" id="subscribed" >Subscribed</button>
+            <%}else{%>
+                <button hx-get = "/subscribe?c=<%=channelinfo.id%>&value=true"
+                    hx-swap = "outerHTML"  class="subscribe-btn" >Subscribe</button>
+            <%}%>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="videos-collection" id="recent_uploads">
+            
+        <div class="title"><img src="./images/recent.png" loading="lazy" alt=""> Recent Uploads <span><%=channelactivities.length%></span>  <a>See All</a></div>
+
+        <div class="collection">
+
+            <%for(let i = 0 ; i < channelactivities.length ; i++){%>
+
+                     
+            <%  let d1 = new Date(channelactivities[i].snippet.publishedAt);%>
+            <%  let d2 = new Date();%>
+            <%  let date = Math.abs(d2-d1);%>
+            <%  let time = 0;%>
+            <%  date = date/(1000*60); time = Math.trunc(date) +" mins" %>
+            <%  if(date >= 60){ date = date/60; time = Math.trunc(date) + " hours";%>
+            <%  if(date >= 24){ date = date/24; time = Math.trunc(date) + " days"%>
+            <%  if(date >= 31){ date = date/30.4167; time = Math.trunc(date) + " months"%>
+            <%  if(date >= 12){ date = date/12; time = Math.trunc(date) + " years"}%>
+            <%  }}}%>
+
+            <% if(channelactivities[i].snippet.type === "upload"){ %>
+
+       
+
+            <%if(i < 4){%>
+            <div class="vid-list visible">
+                <a class="thumb-link" href="/videopage?v=<%=channelactivities[i].contentDetails.upload.videoId%>&c=<%=channelactivities[i].snippet.channelId%>"><img src="<%=channelactivities[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                <div class="vid-title"><%=channelactivities[i].snippet.title%></div>
+                <div class="vid-channel"><%=channelinfo.snippet.title%></div>
+                <div class="vid-detials"><%=time%> ago</div>
+           </div>
+            <%}else{%>
+            <div class="vid-list hidden">
+                <a class="thumb-link" href="/videopage?v=<%=channelactivities[i].contentDetails.upload.videoId%>&c=<%=channelactivities[i].snippet.channelId%>"><img src="<%=channelactivities[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                <div class="vid-title"><%=channelactivities[i].snippet.title%></div>
+                <div class="vid-channel"><%=channelinfo.snippet.title%></div>
+                <div class="vid-detials"><%=time%> ago</div>
+           </div>
+            <%}%>
+            
+            <%}%>
+
+            <% if(channelactivities[i].snippet.type === "playlistItem"){ %>
+
+                <%if(i < 4){%>
+                    <div class="vid-list visible">
+                        <a class="thumb-link" href="/playlist?p=<%=channelactivities[i].contentDetails.playlistItem.playlistId%>"><img src="<%=channelactivities[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                        <div class="vid-title"><%=channelactivities[i].snippet.title%></div>
+                        <div class="vid-channel"><%=channelinfo.snippet.title%> </div>
+                        <div class="vid-detials"><%=time%> ago <span> (Added to Playlist)</span></div>
+                   </div>
+                <%}else{%>
+                    <div class="vid-list hidden">
+                        <a class="thumb-link" href="/playlist?p=<%=channelactivities[i].contentDetails.playlistItem.playlistId%>"><img src="<%=channelactivities[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                        <div class="vid-title"><%=channelactivities[i].snippet.title%></div>
+                        <div class="vid-channel"><%=channelinfo.snippet.title%> </div>
+                        <div class="vid-detials"><%=time%> ago <span> (Added to Playlist)</span></div>
+                   </div>
+                <%}%>
+            
+            <%}%>
+            
+            <%}%>
+                        
+
+        </div>
+        
+    
+    </div>                     <!-- *********************** -->
+
+    <hr>
+
+    <div class="videos-collection" id="playlists">
+            
+        <div class="title"><img src="./images/playlisticon.png" loading="lazy"  alt=""> Playlists <span><%=playlists_count%></span>  <a>See All</a></div>
+        
+        <div class="collection">
+
+            <%for(let i = 0 ; i < channelplaylists.length ; i++){%>
+
+                <%  d1 = new Date(channelplaylists[i].snippet.publishedAt);%>
+                <%  d2 = new Date();%>
+                <%  date = Math.abs(d2-d1);%>
+                <%  time = 0;%>
+                <%  date = date/(1000*60); time = Math.trunc(date) +" mins" %>
+                <%  if(date >= 60){ date = date/60; time = Math.trunc(date) + " hours";%>
+                <%  if(date >= 24){ date = date/24; time = Math.trunc(date) + " days"%>
+                <%  if(date >= 31){ date = date/30.4167; time = Math.trunc(date) + " months"%>
+                <%  if(date >= 12){ date = date/12; time = Math.trunc(date) + " years"}%>
+                <%  }}}%>
+
+            <%if(i < 4){%>
+            <div class="vid-list visible">
+                <a href="/playlist?p=<%=channelplaylists[i].id%>"><img src="<%=channelplaylists[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                 <div class="vid-title"><%=channelplaylists[i].snippet.title%></div>
+                 <div class="vid-channel"><%=channelplaylists[i].snippet.channelTitle%></div>
+                 <div class="vid-detials"><%=channelplaylists[i].contentDetails.itemCount%> items &bull; <%=time%> ago</div>
+            </div>
+            <%}else{%>
+            <div class="vid-list hidden">
+                <a href="/playlist?p=<%=channelplaylists[i].id%>"><img src="<%=channelplaylists[i].snippet.thumbnails.medium.url%>" loading="lazy" alt="" srcset=""></a>
+                 <div class="vid-title"><%=channelplaylists[i].snippet.title%></div>
+                 <div class="vid-channel"><%=channelplaylists[i].snippet.channelTitle%></div>
+                 <div class="vid-detials"><%=channelplaylists[i].contentDetails.itemCount%> items &bull; <%=time%> ago</div>
+            </div>
+            <%}%>
+                 
+                        
+            <%}%>
+
+        </div>
+    
+    </div>                     <!-- *********************** -->
+
+    <hr>
+
+
+
+
+</div>
+
+
+
+<script>
+let playlist_btn = document.querySelector('#playlists .title a');
+let hidden_playlist_videos = document.querySelectorAll('#playlists .hidden');
+
+playlist_btn.addEventListener('click',()=>{
+    hidden_playlist_videos.forEach(item => {
+        item.classList.toggle('visible');
+    });
+})
+
+let recent_uploads_btn = document.querySelector('#recent_uploads .title a');
+let hidden_recents_videos = document.querySelectorAll('#recent_uploads .hidden');
+
+recent_uploads_btn.addEventListener('click',()=>{
+    hidden_recents_videos.forEach(item => {
+        item.classList.toggle('visible');
+    });
+})
+
+</script>

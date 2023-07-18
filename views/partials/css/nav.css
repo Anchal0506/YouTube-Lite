@@ -1,0 +1,376 @@
+::-webkit-progress-bar{
+    color: white
+}
+
+:root{
+    --dark : #0f0f0f;
+    --white : #f1f1f1;
+}
+
+nav{
+    padding: 10px 2%;
+    width: 100%;
+    height: 60px;
+    justify-content: space-between;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: 0.4s all;
+}
+
+
+
+nav i{
+    cursor: pointer;
+}
+
+.nav-right img{
+    width: 25px;
+    margin-right: 25px ;
+}
+
+.nav-right i{
+    width: 25px;
+    margin-right: 25px ;
+}
+
+.nav-right i{
+    font-size: 25px;
+    display: none;
+}
+
+.nav-right .user-icon{
+    width: 35px;
+    border-radius: 50%;
+    margin-right: 0;
+}
+
+.nav-left{
+    height: 100%;
+}
+
+.nav-left .menu-icon{
+   font-size: 25px;
+   margin-right: 25px;
+}
+
+.nav-left .logo{
+    width: 105px;
+}
+
+.nav-left .logo-small{
+    color: red;
+    font-size: 45px;
+    margin-right: 25px ;
+}
+
+.nav-middle{
+    width: 600px;
+}
+
+.nav-middle .search-box{
+   border: 1px solid #ccc;
+   width: 100%;
+   height: 40px;
+   border-radius: 25px;
+   margin: 15px;
+}
+
+.nav-middle .search-box .input-div{
+    width: 90%;
+    height: 100%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.nav-middle .search-box input{
+    padding: 0px 12px;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border: none;
+    outline: 0;
+}
+
+.nav-middle .search-box input:focus{
+    border: none;
+}
+
+.nav-middle .search-box img{
+    width: 15px ;
+    filter: invert(100%);
+}
+
+.nav-middle .search-box .btn-div{
+    height: 100%;
+    width: 10%;
+    padding: 0px 0px;
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-left: solid 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-middle .search-box .btn-div:hover{
+    background-color: rgba(0, 0, 0, 0.07);
+}
+
+.nav-middle .search-box button{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    height: 100%;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+}
+
+.search-box-small{
+    flex-basis: 100%;
+    display: none;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+    transition: 0.4s all;
+    margin-top: -60px;
+}
+
+.visible-box{
+    transition: 0.4s all;
+    margin-top: 0px;
+    top: 60px;
+}
+
+.search-box-small input{
+    border: none;
+    border-bottom: solid #606060 0.5px;
+    outline: none;
+    width: 99%;
+    border-radius: 2px;
+    height: 50px;
+    font-size: 1.3rem;
+    padding: 0 5%;
+    background: rgb(237, 237, 237)
+}
+
+.search-box input:focus{
+    border-bottom: solid #606060 0.7px;
+}
+
+#dark-btn{
+    display: flex;
+    justify-content: space-evenly;
+    background: black;
+    width: 83px;
+    border-radius: 15px;
+    padding: 2px 0px 2px 0px;
+    margin-right: 15px;
+}
+
+#mode-btn{
+    transition: 1s all;
+}
+
+#mode-btn .fa-moon{
+    margin-right: 0;
+    border-radius: 50% 0 0 50%;
+}
+
+#mode-btn i{
+    background: #0f0f0f;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    margin-right: 0;
+    height: 30px;
+    border-radius: 0 50% 50% 0;
+}
+
+#ball{
+    min-width: 27px;
+    min-height: 27px;
+    position: absolute;
+    translate: 75%;
+    transition: .5s all;
+    border-radius: 50%;
+    background: white;
+}
+
+#ball.dark{
+    translate: -75%;
+}
+
+.user-menu{
+    position: relative;;
+}
+
+.user-actions{
+    position: absolute;
+    transform: translate(-100%, -6%);
+    width: 18%;
+    border-radius: 12px;
+    border-top-right-radius: 0;
+    padding: 1% 2%;
+    background: #fff;
+    box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s all;
+}
+
+.user-actions.hide{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.user-actions a {
+    padding: 5% 5%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.user-actions a:hover {
+    background: rgb(0 0 0 / 10%);
+}
+
+
+.usermenu hr {
+    margin: 5% 0;
+    background: rgba(0,0,0, 0.3);
+    border: none;
+    height: 0.5px;
+}
+
+.user-actions img {
+
+    margin: 0;
+    margin-right: 5%;
+    width: 1.3rem;
+}
+
+.logoutbtn{
+    background: #ff00009f;;
+}
+
+
+@media (prefers-color-scheme: dark) {
+
+    .user-actions{
+        background: #282828;
+        box-shadow: 0px 4px 32px 0px rgba(255, 255, 255, 0.1);
+    }
+
+    .user-actions a:hover {
+        background: rgb(255 255 255 / 10%);
+    }
+    
+    .user-actions img{
+        filter: invert(1);
+    }
+    
+    .usermenu hr {
+        background: rgba(255,255,255, 0.3);
+    }
+    
+    .logoutbtn{
+        background: #ff00008a;;
+    }
+  
+    nav{
+        background: #0f0f0f;
+    }
+
+    .nav-left .menu-icon {
+       background: #0f0f0f;
+       color: white;
+    }
+
+    .nav-middle .search-box input {
+        background-color: #0f0f0f;
+        color: var(--white);
+    }
+
+    .nav-middle .search-box {
+       border: 2px solid #353535;
+    }
+
+    .nav-middle .search-box .btn-div {
+        border-left: none;
+    }
+    .nav-middle .search-box button {
+        background: #353535;
+    }
+    .nav-middle .search-box img {
+        filter: brightness(1.5);
+    }
+
+    .nav-left .logo {
+        filter: brightness(6);
+    }
+
+}
+
+@media (min-width:901px){
+    .nav-left .logo{
+        display: block;
+    }
+    .nav-left .logo-small{
+        display: none;
+    }
+}
+
+@media (max-width:900px){
+    nav{
+        flex-wrap: wrap;
+    }
+
+    .user-actions{
+        width: 30%;
+    }
+
+    .nav-left .logo{
+        display: none;
+    }
+
+    .nav-left .logo-small{
+        display: block;
+    }
+
+    .nav-left .menu-icon{
+        display: none;
+    }
+
+    .nav-middle{
+        width: auto;
+    }
+    .nav-middle .search-box{
+       display: none;
+    }
+
+    .nav-right .upload , .nav-right .more , .nav-right .notification{
+        display: none;
+    }
+
+    .nav-right .search{
+        display: inline;
+    }
+
+    .search-box-small{
+        display: flex;
+    }
+
+    ::-webkit-scrollbar {
+        display: none!important;
+      }
+}

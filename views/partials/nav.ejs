@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="./partials/css/nav.css">
+<nav class="flex-div">
+    <div class="nav-left flex-div">
+        <!-- <img src="./images/menu.png" class="menu-icon" alt="" srcset=""> -->
+
+       <i class="fa-solid fa-bars menu-icon"></i>
+
+       <a href="/"> <img src="../images/logo.png" class="logo" alt="" srcset=""> </a>
+
+       <a href="/"> <i class="fa-brands fa-youtube logo-small"></i> </a>
+       
+    </div>
+
+
+    <div class="nav-middle flex-div">
+            <form action="/searchresults" method="post" class="search-box flex-div">
+                <div class="input-div">
+              <input type="text" id="searchquery" name="searchquery" placeholder="Search" value="<%=queryvalue%>">
+                </div>
+                <div class="btn-div">
+              <button type="submit"><img src="../images/search.png"></button>
+            </div>
+            </form>
+    </div>
+
+
+    <div class="nav-right flex-div">
+        <a href="#"> <i class="fa-solid fa-magnifying-glass search"></i></a>
+        <div class="usermenu">
+          <a class="profile-section"> <img src=<%=profile.photos[0].value%> alt="" class="user-icon"> </a>
+          <div class="user-actions hide">
+           <a href="/likedvideos"> <img src="../images/like.png" alt="."> Your Liked Videos</a>
+              <hr>
+           <a href="/userpage"> <img src="../images/library.png" alt=""> Library</a>
+              <hr>
+           <a href="/googleauth/logout" class="logoutbtn"> <img src="../images/logout.png" alt=""> LogOut</a>
+          </div>
+        </div>
+       
+    </div>
+
+   
+</nav>
+
+
+
+
+<script>
+let search_btn = document.querySelector('.nav-right .search');
+let box = document.querySelector('.search-box-small');
+let usermenu_btn = document.querySelector('.usermenu .profile-section');
+let user_section = document.querySelector('.user-actions')
+
+search_btn.addEventListener('click',()=>{
+    box.classList.toggle('visible-box')
+});
+
+
+usermenu_btn.addEventListener('click',()=>{
+    user_section.classList.toggle('hide');
+})
+
+document.addEventListener('mousedown', function(e) {
+    if (!user_section.contains(e.target) && !usermenu_btn.contains(e.target)) {
+      if(!user_section.classList.contains('hide')){
+          user_section.classList.add('hide');
+       }
+    }
+});
+
+
+
+</script>
