@@ -8,11 +8,12 @@ UserPage.use(express.json());
 UserPage
 .get('/',async (req,res)=>{
     
+        
+
+    try {
         let {liked,count}= await liked_videos();
         let {playlists ,playlist_count} = await user_playlists();
         let {subs,sub_count} = await user_subscriptions();
-
-    try {
        res.render('UserPage.ejs',{
         queryvalue : "" , 
         profile : req.user.profile,
